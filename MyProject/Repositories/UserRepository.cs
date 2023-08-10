@@ -15,7 +15,7 @@ namespace MyProject.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<string> AddUserAsync(UserModel model)
+        public async Task<int> AddUserAsync(RequestUserModel model)
         {
             var newUser = _mapper.Map<User>(model);
             _context.Users!.Add(newUser);
@@ -23,7 +23,7 @@ namespace MyProject.Repositories
             return newUser.UserID;
         }
 
-        public async Task DeleteUserAsync(string userID)
+        public async Task DeleteUserAsync(int userID)
         {
             var deleteUser = _context.Users!.SingleOrDefault(u => u.UserID == userID);
             if (deleteUser != null)
@@ -39,13 +39,13 @@ namespace MyProject.Repositories
             return _mapper.Map<List<UserModel>>(users);
         }
 
-        public async Task<UserModel> GetUserAsync(string userID)
+        public async Task<UserModel> GetUserAsync(int userID)
         {
             var user = await _context.Users!.FindAsync(userID);
             return _mapper.Map<UserModel>(user);
         }
 
-        public async Task UpdateUserAsync(string userID, UserModel model)
+        public async Task UpdateUserAsync(int userID, UserModel model)
         {
             if (userID == model.UserID)
             {

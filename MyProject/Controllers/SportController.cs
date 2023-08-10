@@ -30,13 +30,13 @@ namespace MyProject.Controllers
             }
         }
         [HttpGet("{sportId}")]
-        public async Task<IActionResult> GetSportByID(string sportId)
+        public async Task<IActionResult> GetSportByID(int sportId)
         {
             var sport = await _sportRepo.GetSportsAsync(sportId);
             return sport == null ? NotFound() : Ok(sport);
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewSport(SportModel model)
+        public async Task<IActionResult> AddNewSport([FromBody] RequestSportModel model)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace MyProject.Controllers
             }
         }
         [HttpPut("{sportId}")]
-        public async Task<IActionResult> UpdateSport(string sportId,[FromBody] SportModel model)
+        public async Task<IActionResult> UpdateSport(int sportId,[FromBody] SportModel model)
         {
             if (sportId != model.SportID)
             {
@@ -60,10 +60,15 @@ namespace MyProject.Controllers
             return Ok();
         }
         [HttpDelete("{sportId}")]
-        public async Task<IActionResult> DeleteSport([FromRoute] string sportId)
+        public async Task<IActionResult> DeleteSport([FromRoute] int sportId)
         {
+            var sport = await _sportRepo.GetSportsAsync(sportId);
+            if (sport == null)
+                return NotFound();
             await _sportRepo.DeleteSportAsync(sportId);
             return Ok();
         }
+
+        
     }
 }

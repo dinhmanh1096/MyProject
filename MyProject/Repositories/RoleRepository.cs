@@ -17,7 +17,7 @@ namespace MyProject.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<string> AddRoleAsync(RoleModel model)
+        public async Task<int> AddRoleAsync(RequestRoleModel model)
         {
             var newRole=_mapper.Map<Role>(model);
             _context.Roles!.Add(newRole);
@@ -25,7 +25,7 @@ namespace MyProject.Repositories
             return newRole.RoleID;
         }
 
-        public async Task DeleteRoleAsync(string roleId)
+        public async Task DeleteRoleAsync(int roleId)
         {
             var deleteRole = _context.Roles!.SingleOrDefault(r => r.RoleID == roleId);
             if (deleteRole != null)
@@ -42,13 +42,13 @@ namespace MyProject.Repositories
             return _mapper.Map<List<RoleModel>>(roles);
         }
 
-        public async Task<RoleModel> GetRoleAsync(string roleId)
+        public async Task<RoleModel> GetRoleAsync(int roleId)
         {
             var role = await _context.Roles!.FindAsync(roleId);
             return _mapper.Map<RoleModel>(role);
         }
 
-        public async Task UpdateRoleAsync(string roleId, RoleModel model)
+        public async Task UpdateRoleAsync(int roleId, RoleModel model)
         {
             if(roleId==model.RoleID)
             {

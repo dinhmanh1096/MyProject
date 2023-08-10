@@ -3,9 +3,13 @@
 namespace MyProject.Models
 {
     public class RoleModel
-    {
-        
-        public string RoleID { get; set; }
+    {       
+        public int RoleID { get; set; }
         public string RoleName { get; set; }
+    }
+
+    public class RequestRoleModel
+    {
+       public string RoleName { get; set; }
     }
 }

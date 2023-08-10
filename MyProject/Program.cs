@@ -1,10 +1,22 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MyProject.Data;
+using MyProject.Models;
 using MyProject.Repositories;
+using MyProject.Validation;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+//builder.Services.AddTransient<IValidator<RequestSportModel>,SportValidator>();
+builder.Services.AddControllers()
+    .AddFluentValidation(v => {
+        v.ImplicitlyValidateChildProperties = true;
+        v.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+        });
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -25,6 +37,8 @@ builder.Services.AddScoped<ISportRepository,SportRepository>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddScoped<IWorkoutRepository,WorkoutRepository>();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
+
+
 //
 var app = builder.Build();
 

@@ -5,9 +5,9 @@ namespace MyProject.Repositories
     public interface IUserRepository
     {
         public Task<List<UserModel>> GetAllUserAsync();
-        public Task<UserModel> GetUserAsync(string userID);
-        public Task<string> AddUserAsync(UserModel model);
-        public Task UpdateUserAsync(string userID, UserModel model);
-        public Task DeleteUserAsync(string userID);
+        public Task<UserModel> GetUserAsync(int userID);
+        public Task<int> AddUserAsync(RequestUserModel model);
+        public Task UpdateUserAsync(int userID, UserModel model);
+        public Task DeleteUserAsync(int userID);
     }
 }

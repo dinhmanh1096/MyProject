@@ -14,7 +14,8 @@ namespace MyProject.Migrations
                 name: "Role",
                 columns: table => new
                 {
-                    RoleID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -26,7 +27,8 @@ namespace MyProject.Migrations
                 name: "Sport",
                 columns: table => new
                 {
-                    SportID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    SportID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SportName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -38,11 +40,14 @@ namespace MyProject.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    RoleID = table.Column<string>(type: "nvarchar(5)", nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -60,13 +65,14 @@ namespace MyProject.Migrations
                 name: "Workout",
                 columns: table => new
                 {
-                    WorkoutID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    WorkoutID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     WorkoutName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Distance = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Speed = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Time = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SportID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
+                    SportID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

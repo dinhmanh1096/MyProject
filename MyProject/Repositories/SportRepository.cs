@@ -15,7 +15,7 @@ namespace MyProject.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<string> AddSportAsync(SportModel model)
+        public async Task<int> AddSportAsync(RequestSportModel model)
         {
             var newSport= _mapper.Map<Sport>(model);
             _context.Sports.Add(newSport);
@@ -23,7 +23,7 @@ namespace MyProject.Repositories
             return newSport.SportID;
         }
 
-        public async Task DeleteSportAsync(string sportId)
+        public async Task DeleteSportAsync(int sportId)
         {
             var deleteSport = _context.Sports.SingleOrDefault(s=>s.SportID==sportId);
             if(deleteSport!=null)
@@ -31,7 +31,7 @@ namespace MyProject.Repositories
                 _context.Sports.Remove(deleteSport);
                 await _context.SaveChangesAsync();
             }
-        }
+        }      
 
         public async Task<List<SportModel>> GetAllSportsAsync()
         {
@@ -39,13 +39,13 @@ namespace MyProject.Repositories
             return _mapper.Map<List<SportModel>>(sports);
         }
 
-        public async Task<SportModel> GetSportsAsync(string sportId)
+        public async Task<SportModel> GetSportsAsync(int sportId)
         {
             var sport = await _context.Sports!.FindAsync(sportId);
             return _mapper.Map<SportModel>(sport);
         }
 
-        public async Task UpdateSportAsync(string sportId, SportModel sport)
+        public async Task UpdateSportAsync(int sportId, SportModel sport)
         {
             if(sportId==sport.SportID)
             {
@@ -53,6 +53,23 @@ namespace MyProject.Repositories
                 _context.Sports.Update(updateSport);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public List<SportModel> GetAll(string search)
+        {
+            var allProducts = _context.Sports.AsQueryable();
+            if (!string.IsNullOrEmpty(search))
+            {
+                allProducts = allProducts.Where(s => s.SportName.Contains(search));
+            }
+
+                var result = allProducts.Select(s => new SportModel
+                {
+                    SportID = s.SportID,
+                    SportName = s.SportName
+                });
+                return result.ToList();
+            
         }
     }
 }

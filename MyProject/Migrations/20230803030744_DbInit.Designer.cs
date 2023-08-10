@@ -11,7 +11,7 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20230726015334_DbInit")]
+    [Migration("20230803030744_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -26,9 +26,11 @@ namespace MyProject.Migrations
 
             modelBuilder.Entity("MyProject.Data.Role", b =>
                 {
-                    b.Property<string>("RoleID")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("RoleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
 
                     b.Property<string>("RoleName")
                         .IsRequired()
@@ -42,9 +44,11 @@ namespace MyProject.Migrations
 
             modelBuilder.Entity("MyProject.Data.Sport", b =>
                 {
-                    b.Property<string>("SportID")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("SportID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SportID"));
 
                     b.Property<string>("SportName")
                         .IsRequired()
@@ -58,14 +62,24 @@ namespace MyProject.Migrations
 
             modelBuilder.Entity("MyProject.Data.User", b =>
                 {
-                    b.Property<string>("UserID")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FistName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -77,9 +91,8 @@ namespace MyProject.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("RoleID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -95,9 +108,11 @@ namespace MyProject.Migrations
 
             modelBuilder.Entity("MyProject.Data.Workout", b =>
                 {
-                    b.Property<string>("WorkoutID")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("WorkoutID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorkoutID"));
 
                     b.Property<string>("Distance")
                         .IsRequired()
@@ -107,19 +122,15 @@ namespace MyProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SportID")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("SportID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Time")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("WorkoutName")
                         .IsRequired()

@@ -29,13 +29,13 @@ namespace MyProject.Controllers
             }
         }
         [HttpGet("{workoutID}")]
-        public async Task<IActionResult> GetWorkoutByID(string workoutID)
+        public async Task<IActionResult> GetWorkoutByID(int workoutID)
         {
             var workout = await _WorkoutRepo.GetWorkoutAsync(workoutID);
             return workout == null ? NotFound() : Ok(workout);
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewWorkout(WorkoutModel model)
+        public async Task<IActionResult> AddNewWorkout(RequestWorkoutModel model)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace MyProject.Controllers
             }
         }
         [HttpPut("{workoutID}")]
-        public async Task<IActionResult> UpdateWorkout(string workoutID, [FromBody] WorkoutModel model)
+        public async Task<IActionResult> UpdateWorkout(int workoutID, [FromBody] WorkoutModel model)
         {
             if (workoutID != model.WorkoutID)
             {
@@ -59,8 +59,11 @@ namespace MyProject.Controllers
             return Ok();
         }
         [HttpDelete("{workoutID}")]
-        public async Task<IActionResult> DeleteWorkout(string workoutID)
+        public async Task<IActionResult> DeleteWorkout(int workoutID)
         {
+            var workout = await _WorkoutRepo.GetWorkoutAsync(workoutID);
+            if (workout == null)
+                return NotFound();
             await _WorkoutRepo.DeleteWorkoutAsync(workoutID);
             return Ok();
         }

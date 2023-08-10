@@ -4,17 +4,13 @@ namespace MyProject.Data
 {
     public class Workout
     {
-        [MaxLength(5)]
-        public string WorkoutID { get; set; }
-        [MaxLength(50)]
+        public int WorkoutID { get; set; }
         public string WorkoutName { get; set; }
         public string Distance { get; set; }
         public string Speed { get; set; }
         public string Time { get; set; }
-        [MaxLength(5)]
-        public string SportID { get; set; }
-        [MaxLength(5)]
-        public string UserID { get; set; }
+        public int SportID { get; set; }
+        public int UserID { get; set; }
 
         //
         public Sport sport { get; set; }

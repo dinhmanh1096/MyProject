@@ -15,7 +15,7 @@ namespace MyProject.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<string> AddWorkoutAsync(WorkoutModel model)
+        public async Task<int> AddWorkoutAsync(RequestWorkoutModel model)
         {
             var newWorkout = _mapper.Map<Workout>(model);
             _context.Workouts.Add(newWorkout);
@@ -23,7 +23,7 @@ namespace MyProject.Repositories
             return newWorkout.WorkoutID;
         }
 
-        public async Task DeleteWorkoutAsync(string workoutID)
+        public async Task DeleteWorkoutAsync(int workoutID)
         {
             var deleteWorkout = _context.Workouts.SingleOrDefault(r => r.WorkoutID == workoutID);
             if (deleteWorkout != null)
@@ -39,13 +39,13 @@ namespace MyProject.Repositories
             return _mapper.Map<List<WorkoutModel>>(workouts);
         }
 
-        public async Task<WorkoutModel> GetWorkoutAsync(string workoutID)
+        public async Task<WorkoutModel> GetWorkoutAsync(int workoutID)
         {
             var workout = await _context.Workouts.FindAsync(workoutID);
             return _mapper.Map<WorkoutModel>(workout);
         }
 
-        public async Task UpdateWorkoutAsync(string workoutID, WorkoutModel model)
+        public async Task UpdateWorkoutAsync(int workoutID, WorkoutModel model)
         {
             if (workoutID == model.WorkoutID)
             {

@@ -87,3 +87,6 @@ C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\obj\Debug\net6.0\MyPr
 C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\obj\Debug\net6.0\ref\MyProject.dll
 C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\intern.ndinhmanh\source\repos\MyProject\MyProject\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

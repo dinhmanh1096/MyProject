@@ -6,11 +6,10 @@ namespace MyProject.Data
     public class Role
     {
         [Key]
-        [MaxLength(5)]
-        public string RoleID { get; set; }
-        [MaxLength(50)]
+        public int RoleID { get; set; }
         public string RoleName { get; set; }
-
+        [MaxLength(250)]
+        public string Description { get; set; }
         //
         public ICollection<User> Users { get; set; }
     }

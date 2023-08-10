@@ -2,7 +2,11 @@
 {
     public class SportModel
     {
-        public string SportID { get; set; }
+        public int SportID { get; set; }
+        public string SportName { get; set; }
+    }
+    public class RequestSportModel
+    {
         public string SportName { get; set; }
     }
 }

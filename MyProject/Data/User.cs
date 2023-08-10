@@ -4,17 +4,15 @@ namespace MyProject.Data
 {
     public class User
     {
-        [MaxLength(5)]
-        public string UserID { get; set; }
-        [MaxLength(50)]
+        public int UserID { get; set; }
+
         public string UserName { get; set; }
-        [MaxLength(50)]
+        public string FistName { get; set; }
+        public string LastName { get; set; }
         public string Address { get; set; }
 
-        [MaxLength(10)]
         public string PhoneNumber { get; set; }
-        public string RoleID { get; set; }
-        [MaxLength(20)]
+        public int RoleID { get; set; }
         public string Password { get; set; }
         //
         public Role Role { get; set; }

@@ -29,13 +29,13 @@ namespace MyProject.Controllers
             }
         }
         [HttpGet("{userID}")]
-        public async Task<IActionResult> GetUserByID(string userID)
+        public async Task<IActionResult> GetUserByID(int userID)
         {
             var user = await _userRepo.GetUserAsync(userID);
             return user == null ? NotFound() : Ok(user);
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewUser(UserModel model)
+        public async Task<IActionResult> AddNewUser(RequestUserModel model)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace MyProject.Controllers
             }
         }
         [HttpPut("{userID}")]
-        public async Task<IActionResult> UpdateSport(string userID, [FromBody] UserModel model)
+        public async Task<IActionResult> UpdateSport(int userID, [FromBody] UserModel model)
         {
             if (userID != model.UserID)
             {
@@ -59,8 +59,11 @@ namespace MyProject.Controllers
             return Ok();
         }
         [HttpDelete("{userID}")]
-        public async Task<IActionResult> DeleteSport(string userID)
+        public async Task<IActionResult> DeleteSport(int userID)
         {
+            var user = await _userRepo.GetUserAsync(userID);
+            if (user == null)
+                return NotFound();
             await _userRepo.DeleteUserAsync(userID);
             return Ok();
         }

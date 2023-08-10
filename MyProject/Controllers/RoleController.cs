@@ -29,13 +29,13 @@ namespace MyProject.Controllers
             }
         }
         [HttpGet("{roleId}")]
-        public async Task<IActionResult> GetRoleByID(string roleId)
+        public async Task<IActionResult> GetRoleByID(int roleId)
         {
             var role = await _roleRepo.GetRoleAsync(roleId);
             return role == null ? NotFound() : Ok(role);
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewRole(RoleModel model)
+        public async Task<IActionResult> AddNewRole(RequestRoleModel model)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace MyProject.Controllers
             }
         }
         [HttpPut("{roleId}")]
-        public async Task<IActionResult> UpdateSport(string roleId, [FromBody] RoleModel model)
+        public async Task<IActionResult> UpdateSport(int roleId, [FromBody] RoleModel model)
         {
             if (roleId != model.RoleID)
             {
@@ -59,8 +59,13 @@ namespace MyProject.Controllers
             return Ok();
         }
         [HttpDelete("{roleId}")]
-        public async Task<IActionResult> DeleteSport( string roleId)
+        public async Task<IActionResult> DeleteSport(int roleId)
         {
+            var role = await _roleRepo.GetRoleAsync(roleId);
+            if (role == null)
+            {
+                return NotFound();
+            }
             await _roleRepo.DeleteRoleAsync(roleId);
             return Ok();
         }
