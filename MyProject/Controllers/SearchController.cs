@@ -23,7 +23,7 @@ namespace MyProject.Controllers
             }
             catch
             {
-                return BadRequest("We can't get product.");
+                return BadRequest();
             }
         }
     }

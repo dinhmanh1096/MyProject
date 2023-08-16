@@ -38,16 +38,11 @@ namespace MyProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewSport([FromBody] RequestSportModel model)
         {
-            try
-            {
+
                 var newSportId = await _sportRepo.AddSportAsync(model);
                 var sport = await _sportRepo.GetSportsAsync(newSportId);
-                return sport == null ? NotFound() : Ok(sport);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                return sport == null ? BadRequest() : Ok(sport);
+
         }
         [HttpPut("{sportId}")]
         public async Task<IActionResult> UpdateSport(int sportId,[FromBody] SportModel model)

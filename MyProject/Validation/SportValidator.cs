@@ -8,7 +8,7 @@ namespace MyProject.Validation
     {
         public SportValidator()
         {
-            RuleFor(s => s.SportName).NotEmpty().MaximumLength(50);
+            RuleFor(s => s.SportName).NotEmpty().MaximumLength(50).Matches(@"^[A-Za-z\s]*$");
         }
     }
 }

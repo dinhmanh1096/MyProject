@@ -7,7 +7,7 @@ namespace MyProject.Validation
     {
         public RoleValidator() 
         {
-            RuleFor(r => r.RoleName).NotEmpty().MaximumLength(50);
+            RuleFor(r => r.RoleName).NotEmpty().MaximumLength(50).Matches(@"^[A-Za-z\s]*$");
         }
     }
 }

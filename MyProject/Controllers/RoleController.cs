@@ -37,16 +37,10 @@ namespace MyProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewRole(RequestRoleModel model)
         {
-            try
-            {
                 var newRoleId = await _roleRepo.AddRoleAsync(model);
                 var role = await _roleRepo.GetRoleAsync(newRoleId);
-                return role == null ? NotFound() : Ok(role);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                return role == null ? BadRequest() : Ok(role);              
+            
         }
         [HttpPut("{roleId}")]
         public async Task<IActionResult> UpdateSport(int roleId, [FromBody] RoleModel model)

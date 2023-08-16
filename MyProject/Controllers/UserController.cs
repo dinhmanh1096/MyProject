@@ -37,16 +37,10 @@ namespace MyProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewUser(RequestUserModel model)
         {
-            try
-            {
                 var newUserId = await _userRepo.AddUserAsync(model);
                 var user = await _userRepo.GetUserAsync(newUserId);
-                return user == null ? NotFound() : Ok(user);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                return user == null ? BadRequest() : Ok(user);
+
         }
         [HttpPut("{userID}")]
         public async Task<IActionResult> UpdateSport(int userID, [FromBody] UserModel model)

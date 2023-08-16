@@ -8,8 +8,8 @@ namespace MyProject.Data
         [Key]
         public int RoleID { get; set; }
         public string RoleName { get; set; }
-        [MaxLength(250)]
-        public string Description { get; set; }
+      //  [MaxLength(250)]
+      //  public string Description { get; set; }
         //
         public ICollection<User> Users { get; set; }
     }

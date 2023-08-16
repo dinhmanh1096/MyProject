@@ -37,16 +37,10 @@ namespace MyProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewWorkout(RequestWorkoutModel model)
         {
-            try
-            {
                 var newWorkoutID = await _WorkoutRepo.AddWorkoutAsync(model);
                 var workout = await _WorkoutRepo.GetWorkoutAsync(newWorkoutID);
-                return workout == null ? NotFound() : Ok(workout);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                return workout == null ? BadRequest() : Ok(workout);
+
         }
         [HttpPut("{workoutID}")]
         public async Task<IActionResult> UpdateWorkout(int workoutID, [FromBody] WorkoutModel model)
